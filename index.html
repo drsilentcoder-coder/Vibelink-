@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click & Win 💰</title>
+<style>
+  body { font-family: Arial; background: #0f172a; color: #fff; text-align: center; padding: 20px; }
+  h1 { color: #22c55e; margin-bottom: 10px; font-size:2em; }
+  a { color: #38bdf8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Giveaway Banner */
+  .giveaway { 
+    background: linear-gradient(135deg, #facc15, #22c55e);
+    color: #0f172a; padding: 25px; border-radius: 15px; margin: 20px 0; font-weight: bold; font-size:1.2em;
+    box-shadow: 0px 0px 20px #facc15;
+  }
+
+  /* Ad Buttons */
+  .ad-button { 
+    background: #22c55e; color: #fff; 
+    padding: 18px 35px; font-size: 1.2em;
+    border: none; border-radius: 12px; cursor: pointer; margin: 15px;
+    box-shadow: 0px 0px 10px #16a34a;
+    transition: transform 0.2s;
+  }
+  .ad-button:hover { 
+    background: #16a34a; transform: scale(1.1);
+  }
+
+  /* Reshare Section */
+  .reshare { margin-top: 20px; font-size: 1em; background:#1e293b; padding:20px; border-radius:12px; }
+  .reshare button { background: #38bdf8; color: #0f172a; padding: 12px 25px; border:none; border-radius:5px; cursor:pointer; font-weight:bold; }
+  .reshare button:hover { background: #22c55e; color:#fff;}
+
+  /* Countdown */
+  .countdown { font-size: 1.3em; font-weight:bold; color:#f472b6; margin-top:10px;}
+
+  /* Points Display */
+  .points { font-size:1.3em; color:#f472b6; margin-top:10px; }
+
+  /* Footer Links */
+  .footer { margin-top:30px; font-size:0.9em; }
+
+  /* Giveaway Images */
+  .giveaway-images { display:flex; justify-content:center; flex-wrap:wrap; margin-top:15px; gap:15px; }
+  .giveaway-images img { width:120px; height:120px; border-radius:15px; box-shadow:0px 0px 15px #facc15; transition: transform 0.3s; }
+  .giveaway-images img:hover { transform: scale(1.1); }
+
+  /* Policy Sections */
+  .policy { background:#1e293b; color:#fff; padding:20px; border-radius:12px; margin-top:30px; text-align:left; }
+</style>
+</head>
+<body>
+
+<h1>Click & Win 💰</h1>
+
+<div class="giveaway">
+🎉 Win Amazing Prizes This Week! Only 5 Lucky Winners! 🎉
+<div class="giveaway-images">
+  <img src="https://via.placeholder.com/120x120.png?text=iPhone+15" alt="iPhone 15 Pro Max">
+  <img src="https://via.placeholder.com/120x120.png?text=AirPods" alt="AirPods">
+  <img src="https://via.placeholder.com/120x120.png?text=Amazon+Gift+Card" alt="Amazon Gift Card">
+  <img src="https://via.placeholder.com/120x120.png?text=Smart+Watch" alt="Smart Watch">
+</div>
+</div>
+
+<div class="countdown" id="countdown">
+Giveaway ends in: 00:00:00
+</div>
+
+<p>Click the buttons below to view ads and earn points!</p>
+
+<button class="ad-button" onclick="clickAd('Ad 1')">View Ad 1</button>
+<button class="ad-button" onclick="clickAd('Ad 2')">View Ad 2</button>
+<button class="ad-button" onclick="clickAd('Ad 3')">View Ad 3</button>
+
+<div class="reshare">
+<p>Want another chance to win? Reshare this website with your friends!</p>
+<button onclick="reshare()">Share Now</button>
+</div>
+
+<div class="points" id="points">Your Points: 0</div>
+
+<div class="footer">
+  <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms & Conditions</a></p>
+</div>
+
+<!-- Privacy Policy Section -->
+<div id="privacy" class="policy">
+  <h2>Privacy Policy</h2>
+  <p>We respect your privacy. This website uses ads to generate revenue. No personal information is collected without your consent. We do not share your data with third parties except for ad delivery.</p>
+  <p>By using this website, you agree to our use of ads and tracking for site improvement.</p>
+</div>
+
+<!-- Terms & Conditions Section -->
+<div id="terms" class="policy">
+  <h2>Terms & Conditions</h2>
+  <p>By participating in giveaways or using this website, you agree to follow all rules stated here. Winners will be selected fairly. Clicking ads should be done by genuine visitors only. Self-clicking or automated clicks are prohibited.</p>
+</div>
+
+<script>
+// Points system
+let points = 0;
+
+// Countdown timer setup (7 days)
+let giveawayEnd = new Date();
+giveawayEnd.setDate(giveawayEnd.getDate() + 7);
+
+function updateCountdown() {
+  let now = new Date().getTime();
+  let distance = giveawayEnd - now;
+  if(distance < 0){
+    document.getElementById("countdown").innerHTML = "Giveaway ended!";
+  } else {
+    let days = Math.floor(distance / (1000*60*60*24));
+    let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    let seconds = Math.floor((distance % (1000*60)) / 1000);
+    document.getElementById("countdown").innerHTML = `Giveaway ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+}
+setInterval(updateCountdown, 1000);
+
+function clickAd(adName){
+  points += 5; 
+  document.getElementById("points").innerText = "Your Points: " + points;
+  alert("You clicked " + adName + "! You earned 5 points. Ads will generate revenue via AdSense.");
+}
+
+function reshare(){
+  points += 10; 
+  document.getElementById("points").innerText = "Your Points: " + points;
+  alert("Share this website with friends! You earned 10 points for sharing. Copy this link: " + window.location.href);
+}
+</script>
+
+</body>
+</html>
